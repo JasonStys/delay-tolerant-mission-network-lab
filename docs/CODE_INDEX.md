@@ -972,14 +972,14 @@ Line numbers refer to formatted source, not this generated document.
 | 28 | `variable rust_root` |
 | 31 | `variable rust_notices` |
 | 34 | `variable command` |
-| 65 | `variable distribution_info` |
-| 66 | `variable notices` |
-| 68 | `variable path` |
-| 78 | `variable executable` |
-| 86 | `variable slug` |
-| 87 | `variable archive` |
-| 90 | `variable source` |
-| 91 | `variable digest` |
+| 67 | `variable distribution_info` |
+| 68 | `variable notices` |
+| 70 | `variable path` |
+| 80 | `variable executable` |
+| 88 | `variable slug` |
+| 89 | `variable archive` |
+| 92 | `variable source` |
+| 93 | `variable digest` |
 
 ## tools/prepare_release.py
 
@@ -1000,22 +1000,22 @@ Line numbers refer to formatted source, not this generated document.
 | 17 | `definition main` |
 | 17 | `parameter executable` |
 | 19 | `variable executable` |
-| 20 | `variable directory` |
-| 21 | `variable output` |
-| 22 | `variable store` |
-| 37 | `variable report` |
-| 43 | `variable process` |
-| 49 | `variable lines` |
-| 51 | `definition read_output` |
-| 54 | `variable line` |
-| 57 | `variable reader` |
-| 60 | `variable url` |
-| 61 | `variable _` |
-| 62 | `variable line` |
-| 64 | `variable url` |
-| 67 | `variable path` |
-| 68 | `variable response` |
-| 69 | `variable body` |
+| 23 | `variable directory` |
+| 24 | `variable output` |
+| 25 | `variable store` |
+| 40 | `variable report` |
+| 46 | `variable process` |
+| 52 | `variable lines` |
+| 54 | `definition read_output` |
+| 57 | `variable line` |
+| 60 | `variable reader` |
+| 63 | `variable url` |
+| 64 | `variable _` |
+| 65 | `variable line` |
+| 67 | `variable url` |
+| 70 | `variable path` |
+| 71 | `variable response` |
+| 72 | `variable body` |
 
 ## tools/upload_release.py
 

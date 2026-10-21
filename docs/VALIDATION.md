@@ -25,6 +25,7 @@ Python tests exercise strict schema/range/coercion/duplicate-key/Unicode/size ha
 - Rust Clippy requested bounded chunk APIs; code was updated rather than disabling the lint. A local Windows incremental-cache hardlink fallback only copied compiler intermediates and was not treated as a runtime correctness failure or reason to weaken OS protections.
 - Manual semantic review found the originally chosen named restart cut could occur between flights. The fixture now checkpoints before tick 2; three delay-specific regressions require actual in-flight copies at that boundary. General every-boundary restart tests remain in place.
 - Final documentation review clarified that injection targets only the lowest-ID message's first source-hop send, not every message. Two additional regressions check a higher-ID message departing first and a lowest-ID message never admitted. Runtime behavior and reviewed benchmark identities did not change.
+- Distribution review added Vite's actual locked license notice for the browser module-preload helper, alongside the existing Python, Rust and PyInstaller notices. The real frozen-app smoke test now requires that notice in every platform bundle.
 - A later local test invocation omitted the task's writable TEMP directory, so Windows sandbox fixture setup failed before affected tests ran. Re-running with a task-owned TEMP/TMP directory passed all 300 tests at the same coverage gate. No test assertions or filesystem protections were disabled. Hosted CI uses its normal runner temporary directory.
 
 ## Evidence interpretation

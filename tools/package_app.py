@@ -60,6 +60,8 @@ def main() -> int:
         str(worker) + ":native",
         "--add-data",
         "docs/THIRD_PARTY.md:docs",
+        "--add-data",
+        "node_modules/vite/LICENSE.md:licenses/vite",
         "launcher.py",
     ]
     distribution_info = distribution("pyinstaller")

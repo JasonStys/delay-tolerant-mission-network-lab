@@ -17,6 +17,9 @@ from pathlib import Path
 def main(executable: Path) -> None:
     """Verify two-process checkpoint recovery, committed SQLite and real production HTTP/native assets."""
     executable = executable.resolve(strict=True)
+    assert "Vite core license" in (
+        executable.parent / "_internal/licenses/vite/LICENSE.md"
+    ).read_text(encoding="utf-8")
     with tempfile.TemporaryDirectory(prefix="dtn-smoke-") as directory:
         output = Path(directory) / "report.json"
         store = Path(directory) / "checkpoints.sqlite3"
