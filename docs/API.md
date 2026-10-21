@@ -12,7 +12,7 @@ Start with [examples/restart.json](../examples/restart.json), exported by the ap
 | `name`         | 1–48 lower-case alphanumeric/hyphen characters; first alphanumeric                                                             |
 | `horizon`      | Integer 1–64                                                                                                                   |
 | `restart_tick` | 0 disables; otherwise 1 through horizon−1                                                                                      |
-| `fault`        | 0 none; 1 first-send corrupt copy per message; 2 first-send duplicate copy per message                                         |
+| `fault`        | 0 none; 1 corrupt the lowest-ID message's first source-hop send; 2 add a duplicate to that send only                           |
 | `messages`     | JSON list of ≤32 exact objects: `id` unique 1–32, `release` 0 through horizon−1, `ttl` 1–64, `payload_hex` 1–16 full hex bytes |
 | `contacts`     | JSON list of ≤32 exact objects: `hop` 0/1, `start` 0 through horizon−1, `end` start+1 through horizon; no same-hop overlap     |
 

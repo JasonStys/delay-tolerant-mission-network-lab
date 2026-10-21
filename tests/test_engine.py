@@ -87,6 +87,24 @@ def test_faults_backpressure_and_retention():
     assert disconnected["totals"]["retained"] == 3 and disconnected["totals"]["attempts"] == 0
 
 
+@pytest.mark.parametrize("fault,kind", [(1, "integrity-rejected"), (2, "duplicate-suppressed")])
+def test_fault_targets_lowest_id_not_first_departure(fault, kind):
+    """Only the lowest-ID message's first source send is injected, or none if it is never admitted."""
+    case = replace(
+        fixture("empty-network"),
+        fault=fault,
+        messages=(Message(1, 4, 28, "aabb"), Message(2, 0, 32, "1122")),
+        contacts=(Contact(0, 0, 32), Contact(1, 0, 32)),
+    )
+    result = analyze(case, Settings())
+    assert [event["id"] for event in result["events"] if event["kind"] == kind] == [1]
+    assert [event["id"] for event in result["events"] if event["kind"] == "sent"][0] == 2
+    rejected = replace(case, messages=(Message(1, 4, 28, "ab" * 16), case.messages[1]))
+    result = analyze(rejected, Settings(capacity=8))
+    assert result["messages"][0]["status"] == "rejected"
+    assert not any(event["kind"] == kind for event in result["events"])
+
+
 @pytest.mark.parametrize("cut", range(1, 32))
 def test_fresh_process_every_boundary(cut):
     """Two actual worker subprocesses resume identical outcomes/events at every supported boundary."""

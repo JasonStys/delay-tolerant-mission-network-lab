@@ -23,8 +23,8 @@ These phase semantics deliberately make boundary cases deterministic. The browse
 ## Faults and guarantees not claimed
 
 - Fault 0: none.
-- Fault 1: each message's first original send has its first payload byte flipped at arrival. CRC-32C rejects it, the sender keeps the trusted original, and retries if possible.
-- Fault 2: each message's first send also schedules a duplicate copy. The duplicate is marked non-authoritative and never takes ownership. This demonstrates explicit duplicate handling, **not adversarial duplicate identification or ACK-loss exactly-once delivery**.
+- Fault 1: the lowest-ID message's first source-hop send has its first payload byte flipped at arrival. CRC-32C rejects it, the sender keeps the trusted original, and retries if possible. Other messages and later sends are unaffected; if that message is never sent, no fault is injected.
+- Fault 2: the lowest-ID message's first source-hop send also schedules one duplicate copy, due one tick after the original. The duplicate is marked non-authoritative and never takes ownership. Other messages and later sends are unaffected. This demonstrates explicit duplicate handling, **not adversarial duplicate identification or ACK-loss exactly-once delivery**.
 
 The single global state machine supplies instantaneous abstract acceptance acknowledgments. It does not model dropped ACKs, distributed consensus, independent node crashes, mutable external clock state, endpoint authentication or malicious payload rewriting. CRC-32C and SHA-256 evidence identities detect accidental changes under the stated checks; neither authenticates a sender. A malicious editor can recompute them.
 
