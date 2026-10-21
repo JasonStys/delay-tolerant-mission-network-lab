@@ -1,0 +1,5 @@
+# Reviewed compiler pin by Jason Stys. CI installs this exact toolchain, without cache uploads.
+[toolchain]
+channel = "1.98.1"
+profile = "minimal"
+components = ["clippy", "rustfmt"]

@@ -1,0 +1,211 @@
+{
+  "cases": [
+    {
+      "id": "88a20398881c84c3b35154798b87eaac4e35b2c96913d56b8997b037534a4a78",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "intermittent-relay",
+      "totals": {
+        "attempts": 6,
+        "delivered": 3,
+        "duplicates": 0,
+        "expired": 0,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": 13.666666667,
+        "offered": 3,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 0,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "c3fadddf1b95da76f25a42b8bd26152ca1a9ff896800e91133e4caa6d6e36d77",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "queue-pressure",
+      "totals": {
+        "attempts": 18,
+        "delivered": 4,
+        "duplicates": 0,
+        "expired": 0,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": 20.75,
+        "offered": 8,
+        "receiver_full": 10,
+        "rejected": 4,
+        "retained": 0,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "72ffca8185b51b5dec5e75a4b78d388ee3907ad7d9d568c6faef71a343cdb98b",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "expiry-boundary",
+      "totals": {
+        "attempts": 2,
+        "delivered": 0,
+        "duplicates": 0,
+        "expired": 1,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": null,
+        "offered": 1,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 0,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "958003ec84d8edaa7e72a753576f348d37d1b53073d57190f875c2cb53b9602f",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "corrupt-first",
+      "totals": {
+        "attempts": 7,
+        "delivered": 3,
+        "duplicates": 0,
+        "expired": 0,
+        "integrity_rejected": 1,
+        "mean_delivery_ticks": 13.666666667,
+        "offered": 3,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 0,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "63ac586fb7c6447a897202c78626899fef93ee486442d8a6821d292abb5ad875",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "duplicate-copy",
+      "totals": {
+        "attempts": 6,
+        "delivered": 3,
+        "duplicates": 1,
+        "expired": 0,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": 13.666666667,
+        "offered": 3,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 0,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "a966b335866f89f8c071cd3aa306f4e2536bf09c8e2193f92f6d2eba60d87779",
+      "recovery": {
+        "checkpoint_hex": "444e4331f322297d02000301000101000000ffff01000101000000ffff00000000000000ffff03000003000000000004000001010004000000ed456ab9",
+        "checkpoint_sha256": "07a4a5b220d9c724a265227628e53049492286729cb9ae385a318720b5b12f8d",
+        "mode": "fresh-worker",
+        "next_tick": 2
+      },
+      "scenario": "restart-inflight",
+      "totals": {
+        "attempts": 6,
+        "delivered": 3,
+        "duplicates": 1,
+        "expired": 0,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": 13.666666667,
+        "offered": 3,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 0,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "bebe8e0ef6758e2e94ef0602144611ca410e7f8a4414f000ca86d00422d41d47",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "priority-choice",
+      "totals": {
+        "attempts": 3,
+        "delivered": 1,
+        "duplicates": 0,
+        "expired": 1,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": 8.0,
+        "offered": 2,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 0,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "3abac1649e123aae643fa8bb5cb662575edbe9faf3d2abdf66a6a83a5ba664f2",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "no-contact",
+      "totals": {
+        "attempts": 0,
+        "delivered": 0,
+        "duplicates": 0,
+        "expired": 0,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": null,
+        "offered": 3,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 3,
+        "unreleased": 0
+      }
+    },
+    {
+      "id": "a163c9bb1c8db8c9a6562f06b227a5817f18b029034b865bdb1400969615ae8c",
+      "recovery": {
+        "checkpoint_hex": null,
+        "checkpoint_sha256": null,
+        "mode": "none",
+        "next_tick": null
+      },
+      "scenario": "empty-network",
+      "totals": {
+        "attempts": 0,
+        "delivered": 0,
+        "duplicates": 0,
+        "expired": 0,
+        "integrity_rejected": 0,
+        "mean_delivery_ticks": null,
+        "offered": 0,
+        "receiver_full": 0,
+        "rejected": 0,
+        "retained": 0,
+        "unreleased": 0
+      }
+    }
+  ]
+}

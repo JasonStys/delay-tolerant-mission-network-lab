@@ -1,0 +1,49 @@
+{
+  "contacts": [
+    {
+      "end": 4,
+      "hop": 0,
+      "start": 0
+    },
+    {
+      "end": 15,
+      "hop": 0,
+      "start": 10
+    },
+    {
+      "end": 12,
+      "hop": 1,
+      "start": 8
+    },
+    {
+      "end": 28,
+      "hop": 1,
+      "start": 20
+    }
+  ],
+  "fault": 2,
+  "horizon": 32,
+  "messages": [
+    {
+      "id": 1,
+      "payload_hex": "aabbccdd",
+      "release": 0,
+      "ttl": 30
+    },
+    {
+      "id": 2,
+      "payload_hex": "11223344",
+      "release": 1,
+      "ttl": 24
+    },
+    {
+      "id": 3,
+      "payload_hex": "01020304",
+      "release": 4,
+      "ttl": 20
+    }
+  ],
+  "name": "restart-inflight",
+  "restart_tick": 2,
+  "schema": 1
+}

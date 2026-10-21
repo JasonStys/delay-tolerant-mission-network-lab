@@ -1,0 +1,37 @@
+# Security analysis by Jason Stys. Jobs: Python and JavaScript/TypeScript CodeQL.
+# Variables: matrix language; no database/artifact/cache upload. Map: docs/FILE_CATALOG.md.
+name: CodeQL
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+  security-events: write
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  analyze:
+    name: Analyze / ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [python, javascript-typescript]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+          queries: security-and-quality
+          dependency-caching: false
+          trap-caching: false
+      - uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          category: /language:${{ matrix.language }}
+          upload-database: false

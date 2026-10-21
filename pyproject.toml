@@ -1,0 +1,26 @@
+# Jason Stys: stdlib runtime, bounded synthetic models and strict verification policy.
+[project]
+name = "delay-tolerant-mission-network-lab"
+version = "1.0.0"
+description = "Bounded store-and-forward simulation, independent verification and fresh-process recovery by Jason Stys"
+requires-python = ">=3.12,<3.15"
+dependencies = []
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+filterwarnings = ["error"]
+[tool.coverage.run]
+branch = true
+source = ["dtnlab"]
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+[tool.mypy]
+strict = true
+python_version = "3.12"
+files = ["dtnlab"]

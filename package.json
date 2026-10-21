@@ -1,0 +1,31 @@
+{
+  "name": "delay-tolerant-mission-network-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "author": "Jason Stys",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "tsc --noEmit && vite build --config web/vite.config.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "audit": "npm audit --audit-level=high"
+  },
+  "overrides": {
+    "playwright-core": "1.64.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.1",
+    "@playwright/test": "1.64.0",
+    "@axe-core/playwright": "4.14.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.4",
+    "vitest": "5.0.3",
+    "prettier": "3.9.10"
+  }
+}

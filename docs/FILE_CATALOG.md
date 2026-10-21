@@ -1,0 +1,74 @@
+# File catalog
+
+Every tracked-intent file; dependencies/private outputs are excluded.
+
+- `.cargo/config.toml` — Static Windows CRT linkage for the native worker.
+- `.gitattributes` — Normalize source text to LF and preserve binary screenshot assets.
+- `.github/workflows/codeql.yml` — # Security analysis by Jason Stys. Jobs: Python and JavaScript/TypeScript CodeQL.
+- `.github/workflows/release.yml` — # Manual draft-release packaging by Jason Stys. Never publishes automatically.
+- `.github/workflows/validate.yml` — # Reproducible dtnlab and portable app validation by Jason Stys.
+- `.gitignore` — Exclude dependencies, runtime/private data, histories and generated builds from Git.
+- `.prettierignore` — Exclude generated indexes, locks and build/dependency trees from formatting.
+- `.prettierrc.json` — Shared readable browser/configuration/Markdown formatting options.
+- `Cargo.lock` — Rust lockfile with only this repository's package; zero external crates.
+- `Cargo.toml` — Dependency-free safe Rust library/worker targets, compiler/lint/release contract.
+- `LICENSE` — MIT License
+- `README.md` — # Delay Tolerant Mission Network Lab
+- `SECURITY.md` — # Security and responsible reporting
+- `docs/API.md` — # Input, worker and HTTP contracts
+- `docs/ARCHITECTURE.md` — # Architecture and decisions
+- `docs/MODEL.md` — # Network model and exact semantics
+- `docs/RELEASE.md` — # Release and maintenance runbook
+- `docs/THIRD_PARTY.md` — # Third-party context and notices
+- `docs/USER_GUIDE.md` — # User guide
+- `docs/VALIDATION.md` — # Validation evidence
+- `docs/images/overview.jpg` — Binary screenshot asset from local application validation
+- `docs/images/workbench.jpg` — Binary screenshot asset from local application validation
+- `docs/reports/benchmark.json` — Reviewed deterministic report identities and metrics for all bundled cases.
+- `dtnlab/__init__.py` — """Offline mission-network simulation by Jason Stys. Public definitions: docs/CODE_INDEX.md."""
+- `dtnlab/__main__.py` — """Local website launcher and reproducible export CLI by Jason Stys.
+- `dtnlab/engine.py` — """Synthetic cases, independent replay gate and deterministic evidence by Jason Stys.
+- `dtnlab/model.py` — """Strict bounded synthetic network schema by Jason Stys.
+- `dtnlab/native.py` — """Fixed-path Rust orchestration and optional durable restart handoff by Jason Stys.
+- `dtnlab/reference.py` — """Independent declarative Python network oracle by Jason Stys.
+- `dtnlab/reports.py` — """Deterministic inert reports and opt-in immutable SQLite history by Jason Stys.
+- `dtnlab/resources/checkpoints.sql` — -- Immutable restart handoff store by Jason Stys. Tables/triggers: docs/CODE_INDEX.md.
+- `dtnlab/resources/history.sql` — -- Immutable local simulation history by Jason Stys. Tables/triggers: docs/CODE_INDEX.md.
+- `dtnlab/server.py` — """Loopback-only, read-only HTTP application by Jason Stys; not an Internet server.
+- `examples/restart.json` — Editable strict invented message/contact case with a fresh-worker restart boundary.
+- `launcher.py` — """Portable application entry point by Jason Stys; main and argv: docs/CODE_INDEX.md.
+- `licenses/PYTHON.txt` — A. HISTORY OF THE SOFTWARE
+- `licenses/RUST-APACHE.txt` — Apache License
+- `licenses/RUST-MIT.txt` — MIT License
+- `package-lock.json` — Resolved npm dependency graph with download integrity values.
+- `package.json` — Pinned browser dependencies, Node version contract and build/test/audit scripts.
+- `playwright.config.ts` — /** Cross-engine website integration configuration by Jason Stys.
+- `pyproject.toml` — Python metadata, supported runtimes, strict lint/type/test and coverage gates.
+- `requirements-dev.in` — Scientific test, type, style, audit and packaging dependency inputs.
+- `requirements-dev.lock` — Universal pinned development/build graph with distribution hashes.
+- `requirements.in` — Standard-library-only Python runtime declaration (no third-party runtime packages).
+- `requirements.lock` — Empty runtime lock: this service uses only the CPython standard library.
+- `rust-toolchain.toml` — Pinned Rust toolchain and documentation component for runtime notices.
+- `rust/lib.rs` — //! Bounded deterministic store-and-forward engine by Jason Stys.
+- `rust/main.rs` — //! Bounded stdin-only native worker by Jason Stys; main/input/output variables: docs/CODE_INDEX.md.
+- `tests/test_engine.py` — """Native/reference, conservation and restart verification by Jason Stys.
+- `tests/test_io.py` — """CLI, report, SQLite and actual loopback HTTP integration tests by Jason Stys.
+- `tests/test_model.py` — """Strict JSON/tick/range envelope and native bridge failure tests by Jason Stys.
+- `tests/ui.spec.ts` — /** Actual three-engine native/service/UI acceptance by Jason Stys. Tests: docs/CODE_INDEX.md.
+- `tools/benchmark.py` — """Deterministic native/reference contracts and descriptive timing by Jason Stys.
+- `tools/package_app.py` — """Build portable native bundles from reviewed source by Jason Stys.
+- `tools/prepare_release.py` — """Fail-closed draft release preparation by Jason Stys.
+- `tools/smoke_app.py` — """Actual frozen application/native resource smoke by Jason Stys.
+- `tools/upload_release.py` — """Upload only a freshly smoke-tested native bundle to its draft by Jason Stys.
+- `tools/verify_repo.py` — """Generate/check exact-line code and file inventories by Jason Stys.
+- `tsconfig.json` — Strict TypeScript contracts for browser, unit and end-user test code.
+- `vitest.config.ts` — /** Pure display-logic tests by Jason Stys; configuration inventory: docs/CODE_INDEX.md. */
+- `web/contracts.test.ts` — /** Replay, geometry and finite preference tests by Jason Stys. Definitions: docs/CODE_INDEX.md. */
+- `web/contracts.ts` — /** Typed replay, finite controls and safe SVG geometry by Jason Stys.
+- `web/env.d.ts` — /** Vite static asset typing by Jason Stys; reference declarations: docs/CODE_INDEX.md. */
+- `web/index.html` — <!-- Delay Tolerant Mission Network Lab by Jason Stys. Root/controls: docs/CODE_INDEX.md. -->
+- `web/main.ts` — /** Deterministic network replay interface by Jason Stys.
+- `web/style.css` — /* Evidence-first responsive visual system by Jason Stys. Selectors and variables: docs/CODE_INDEX.md. */
+- `web/vite.config.ts` — /** Local production asset build by Jason Stys. Configuration variables: docs/CODE_INDEX.md. */
+- `docs/CODE_INDEX.md` — Generated exact-line source inventory.
+- `docs/FILE_CATALOG.md` — This generated complete file index.

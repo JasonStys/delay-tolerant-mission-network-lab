@@ -1,0 +1,87 @@
+# Reproducible dtnlab and portable app validation by Jason Stys.
+# Jobs/variables: OS/Python matrix, browsers and portable bundles; no artifact/cache upload.
+name: Validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: validation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  analysis:
+    name: Evidence / ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, python: "3.12" }
+          - { os: ubuntu-latest, python: "3.14" }
+          - { os: windows-latest, python: "3.14" }
+          - { os: macos-latest, python: "3.14" }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with: { python-version: "${{ matrix.python }}" }
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: rustup toolchain install 1.98.1 --profile minimal --component clippy,rustfmt,rust-docs
+      - run: cargo build --release --locked
+      - run: cargo fmt --check
+      - run: cargo clippy --locked --all-targets -- -D warnings
+      - run: cargo test --locked
+      - run: python -m ruff check dtnlab tests tools launcher.py
+      - run: python -m ruff format --check dtnlab tests tools launcher.py
+      - run: python -m mypy dtnlab
+      - run: python tools/verify_repo.py
+      - run: python -m pytest --cov=dtnlab --cov-report=term-missing
+      - run: python -m tools.benchmark
+      - if: matrix.os == 'ubuntu-latest' && matrix.python == '3.14'
+        run: python -m pip_audit --disable-pip --no-deps -r requirements-dev.lock
+  browser:
+    name: Browser / Chromium + Firefox + WebKit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: { persist-credentials: false }
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with: { python-version: "3.14" }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with: { node-version: "24", package-manager-cache: false }
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: npm ci
+      - run: rustup toolchain install 1.98.1 --profile minimal --component clippy,rustfmt,rust-docs
+      - run: cargo build --release --locked
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+      - run: npm run audit
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run test:e2e
+  portable:
+    name: Portable app / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with: { persist-credentials: false }
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with: { python-version: "3.14" }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with: { node-version: "24", package-manager-cache: false }
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: npm ci
+      - run: npm run build
+      - run: rustup toolchain install 1.98.1 --profile minimal --component clippy,rustfmt,rust-docs
+      - run: cargo build --release --locked
+      - run: python tools/package_app.py

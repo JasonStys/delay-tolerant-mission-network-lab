@@ -1,0 +1,4 @@
+# Jason Stys: stable source text and binary image handling across supported platforms.
+* text=auto eol=lf
+*.png binary
+*.jpg binary

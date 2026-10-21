@@ -1,0 +1,8 @@
+# Development-only testing, audit and packaging inputs. Resolve to a universal hash lock.
+pytest
+pytest-cov
+hypothesis
+ruff
+mypy
+pip-audit
+pyinstaller
