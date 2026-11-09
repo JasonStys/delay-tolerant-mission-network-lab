@@ -17,6 +17,7 @@ Every tracked-intent file; dependencies/private outputs are excluded.
 - `SECURITY.md` — # Security and responsible reporting
 - `docs/API.md` — # Input, worker and HTTP contracts
 - `docs/ARCHITECTURE.md` — # Architecture and decisions
+- `docs/MESSAGE_WATERFALL.md` — # Explain each message's latency
 - `docs/MODEL.md` — # Network model and exact semantics
 - `docs/RELEASE.md` — # Release and maintenance runbook
 - `docs/THIRD_PARTY.md` — # Third-party context and notices
@@ -24,6 +25,7 @@ Every tracked-intent file; dependencies/private outputs are excluded.
 - `docs/VALIDATION.md` — # Validation evidence
 - `docs/images/overview.jpg` — Binary screenshot asset from local application validation
 - `docs/images/workbench.jpg` — Binary screenshot asset from local application validation
+- `docs/reports/PRACTICAL_WORKFLOWS_20261109.md` — # Message waterfall validation — 2026-11-09
 - `docs/reports/benchmark.json` — Reviewed deterministic report identities and metrics for all bundled cases.
 - `dtnlab/__init__.py` — """Offline mission-network simulation by Jason Stys. Public definitions: docs/CODE_INDEX.md."""
 - `dtnlab/__main__.py` — """Local website launcher and reproducible export CLI by Jason Stys.
@@ -35,6 +37,7 @@ Every tracked-intent file; dependencies/private outputs are excluded.
 - `dtnlab/resources/checkpoints.sql` — -- Immutable restart handoff store by Jason Stys. Tables/triggers: docs/CODE_INDEX.md.
 - `dtnlab/resources/history.sql` — -- Immutable local simulation history by Jason Stys. Tables/triggers: docs/CODE_INDEX.md.
 - `dtnlab/server.py` — """Loopback-only, read-only HTTP application by Jason Stys; not an Internet server.
+- `dtnlab/waterfall.py` — """Per-message trace accounting by Jason Stys.
 - `examples/restart.json` — Editable strict invented message/contact case with a fresh-worker restart boundary.
 - `launcher.py` — """Portable application entry point by Jason Stys; main and argv: docs/CODE_INDEX.md.
 - `licenses/PYTHON.txt` — A. HISTORY OF THE SOFTWARE
@@ -54,6 +57,7 @@ Every tracked-intent file; dependencies/private outputs are excluded.
 - `tests/test_engine.py` — """Native/reference, conservation and restart verification by Jason Stys.
 - `tests/test_io.py` — """CLI, report, SQLite and actual loopback HTTP integration tests by Jason Stys.
 - `tests/test_model.py` — """Strict JSON/tick/range envelope and native bridge failure tests by Jason Stys.
+- `tests/test_waterfall.py` — """Hand-calculated message latency and conservative bottleneck contracts by Jason Stys.
 - `tests/ui.spec.ts` — /** Actual three-engine native/service/UI acceptance by Jason Stys. Tests: docs/CODE_INDEX.md.
 - `tools/benchmark.py` — """Deterministic native/reference contracts and descriptive timing by Jason Stys.
 - `tools/package_app.py` — """Build portable native bundles from reviewed source by Jason Stys.

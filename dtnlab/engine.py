@@ -14,6 +14,7 @@ from typing import Any
 from dtnlab.model import Case, load_case, parse_case
 from dtnlab.native import run_case
 from dtnlab.reference import simulate
+from dtnlab.waterfall import waterfalls
 
 RESOURCES = Path(__file__).parent / "resources"
 SCENARIOS = {
@@ -176,6 +177,7 @@ def analyze(
             "mean_delivery_ticks": round(sum(latencies) / len(latencies), 9) if latencies else None,
         },
         **native,
+        "waterfalls": waterfalls(case, native),
     }
     result["id"] = run_id(result)
     return result

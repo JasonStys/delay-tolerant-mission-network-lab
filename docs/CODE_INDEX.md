@@ -38,73 +38,73 @@ Line numbers refer to formatted source, not this generated document.
 
 | Line | Definition / variable / structural identifier |
 | --- | --- |
-| 18 | `variable RESOURCES` |
-| 19 | `variable SCENARIOS` |
-| 30 | `variable CHOICES` |
-| 31 | `variable LIMITATIONS` |
-| 41 | `definition Settings` |
-| 44 | `variable scenario` |
-| 45 | `variable capacity` |
-| 46 | `variable delay` |
-| 47 | `variable policy` |
-| 49 | `definition __post_init__` |
-| 49 | `parameter self` |
-| 53 | `variable key` |
-| 53 | `variable values` |
-| 58 | `definition canonical` |
-| 58 | `parameter value` |
-| 65 | `definition run_id` |
-| 65 | `parameter run` |
-| 68 | `variable key` |
-| 68 | `variable value` |
-| 72 | `definition fixture` |
-| 72 | `parameter scenario` |
-| 76 | `variable messages` |
-| 81 | `variable contacts` |
-| 87 | `variable restart` |
-| 88 | `variable fault` |
-| 90 | `variable messages` |
-| 91 | `variable i` |
-| 93 | `variable contacts` |
-| 95 | `variable messages` |
-| 96 | `variable contacts` |
-| 98 | `variable fault` |
-| 100 | `variable fault` |
-| 102 | `variable restart` |
-| 103 | `variable fault` |
-| 105 | `variable messages` |
-| 109 | `variable contacts` |
-| 111 | `variable contacts` |
-| 112 | `variable message` |
-| 112 | `variable messages` |
-| 114 | `variable messages` |
-| 115 | `variable contacts` |
-| 129 | `definition catalog` |
-| 134 | `definition analyze` |
-| 135 | `parameter case` |
-| 136 | `parameter settings` |
-| 137 | `parameter store` |
-| 138 | `parameter source` |
-| 141 | `variable native` |
-| 142 | `variable reference` |
-| 143 | `variable key` |
-| 145 | `variable counts` |
-| 145 | `variable m` |
-| 146 | `variable e` |
-| 146 | `variable kinds` |
-| 147 | `variable message` |
-| 147 | `variable releases` |
-| 148 | `variable latencies` |
-| 150 | `variable m` |
-| 153 | `variable result` |
-| 184 | `definition build_run` |
-| 184 | `parameter settings` |
-| 184 | `parameter store` |
-| 186 | `variable settings` |
-| 190 | `definition build_import` |
-| 190 | `parameter path` |
-| 190 | `parameter settings` |
-| 190 | `parameter store` |
+| 19 | `variable RESOURCES` |
+| 20 | `variable SCENARIOS` |
+| 31 | `variable CHOICES` |
+| 32 | `variable LIMITATIONS` |
+| 42 | `definition Settings` |
+| 45 | `variable scenario` |
+| 46 | `variable capacity` |
+| 47 | `variable delay` |
+| 48 | `variable policy` |
+| 50 | `definition __post_init__` |
+| 50 | `parameter self` |
+| 54 | `variable key` |
+| 54 | `variable values` |
+| 59 | `definition canonical` |
+| 59 | `parameter value` |
+| 66 | `definition run_id` |
+| 66 | `parameter run` |
+| 69 | `variable key` |
+| 69 | `variable value` |
+| 73 | `definition fixture` |
+| 73 | `parameter scenario` |
+| 77 | `variable messages` |
+| 82 | `variable contacts` |
+| 88 | `variable restart` |
+| 89 | `variable fault` |
+| 91 | `variable messages` |
+| 92 | `variable i` |
+| 94 | `variable contacts` |
+| 96 | `variable messages` |
+| 97 | `variable contacts` |
+| 99 | `variable fault` |
+| 101 | `variable fault` |
+| 103 | `variable restart` |
+| 104 | `variable fault` |
+| 106 | `variable messages` |
+| 110 | `variable contacts` |
+| 112 | `variable contacts` |
+| 113 | `variable message` |
+| 113 | `variable messages` |
+| 115 | `variable messages` |
+| 116 | `variable contacts` |
+| 130 | `definition catalog` |
+| 135 | `definition analyze` |
+| 136 | `parameter case` |
+| 137 | `parameter settings` |
+| 138 | `parameter store` |
+| 139 | `parameter source` |
+| 142 | `variable native` |
+| 143 | `variable reference` |
+| 144 | `variable key` |
+| 146 | `variable counts` |
+| 146 | `variable m` |
+| 147 | `variable e` |
+| 147 | `variable kinds` |
+| 148 | `variable message` |
+| 148 | `variable releases` |
+| 149 | `variable latencies` |
+| 151 | `variable m` |
+| 154 | `variable result` |
+| 186 | `definition build_run` |
+| 186 | `parameter settings` |
+| 186 | `parameter store` |
+| 188 | `variable settings` |
+| 192 | `definition build_import` |
+| 192 | `parameter path` |
+| 192 | `parameter settings` |
+| 192 | `parameter store` |
 
 ## dtnlab/model.py
 
@@ -395,6 +395,62 @@ Line numbers refer to formatted source, not this generated document.
 | 156 | `parameter assets` |
 | 156 | `parameter port` |
 | 158 | `variable server` |
+
+## dtnlab/waterfall.py
+
+| Line | Definition / variable / structural identifier |
+| --- | --- |
+| 14 | `definition waterfalls` |
+| 14 | `parameter case` |
+| 14 | `parameter trace` |
+| 21 | `variable result` |
+| 22 | `variable final` |
+| 22 | `variable row` |
+| 23 | `variable by_message` |
+| 23 | `variable message` |
+| 24 | `variable event` |
+| 27 | `variable message` |
+| 28 | `variable events` |
+| 29 | `variable by_tick` |
+| 30 | `variable event` |
+| 32 | `variable busy` |
+| 32 | `variable node` |
+| 32 | `variable status` |
+| 33 | `variable spans` |
+| 34 | `variable counts` |
+| 35 | `variable tick` |
+| 36 | `variable event` |
+| 37 | `variable kind` |
+| 39 | `variable busy` |
+| 39 | `variable node` |
+| 39 | `variable status` |
+| 41 | `variable busy` |
+| 43 | `variable busy` |
+| 45 | `variable busy` |
+| 45 | `variable node` |
+| 47 | `variable status` |
+| 48 | `variable busy` |
+| 50 | `variable node` |
+| 53 | `variable phase` |
+| 54 | `variable c` |
+| 55 | `variable phase` |
+| 57 | `variable phase` |
+| 60 | `variable phase` |
+| 65 | `variable actual` |
+| 66 | `variable terminal` |
+| 69 | `variable event` |
+| 74 | `variable elapsed` |
+| 77 | `variable event` |
+| 77 | `variable kinds` |
+| 89 | `variable event` |
+| 92 | `variable phase` |
+| 92 | `variable value` |
+| 95 | `variable phase` |
+| 95 | `variable value` |
+| 103 | `variable phase` |
+| 103 | `variable value` |
+| 108 | `variable phase` |
+| 108 | `variable value` |
 
 ## launcher.py
 
@@ -929,20 +985,51 @@ Line numbers refer to formatted source, not this generated document.
 | 167 | `parameter delay` |
 | 167 | `parameter policy` |
 
+## tests/test_waterfall.py
+
+| Line | Definition / variable / structural identifier |
+| --- | --- |
+| 18 | `definition manual` |
+| 18 | `parameter ttl` |
+| 25 | `definition test_independent_two_hop_latency_and_ttl_boundary` |
+| 27 | `variable run` |
+| 28 | `variable item` |
+| 35 | `variable s` |
+| 41 | `variable expired` |
+| 49 | `definition test_every_fixture_accounts_for_elapsed_and_actual_events` |
+| 49 | `parameter scenario` |
+| 51 | `variable run` |
+| 52 | `variable item` |
+| 54 | `variable s` |
+| 56 | `variable e` |
+| 61 | `variable i` |
+| 63 | `variable i` |
+| 66 | `definition test_source_rejection_unreleased_ordering_and_bad_trace` |
+| 68 | `variable case` |
+| 72 | `variable trace` |
+| 73 | `variable rows` |
+| 77 | `variable malformed` |
+| 78 | `variable e` |
+| 83 | `definition test_open_contact_wait_is_ordering_not_missing_link` |
+| 85 | `variable case` |
+| 90 | `variable rows` |
+
 ## tests/ui.spec.ts
 
 | Line | Definition / variable / structural identifier |
 | --- | --- |
-| 48 | `name` |
-| 49 | `href` |
-| 50 | `response` |
-| 88 | `response` |
-| 89 | `body` |
-| 103 | `size` |
-| 104 | `width` |
-| 105 | `scroll` |
-| 108 | `region` |
-| 109 | `name` |
+| 31 | `report` |
+| 32 | `row` |
+| 73 | `name` |
+| 74 | `href` |
+| 75 | `response` |
+| 113 | `response` |
+| 114 | `body` |
+| 128 | `size` |
+| 129 | `width` |
+| 130 | `scroll` |
+| 133 | `region` |
+| 134 | `name` |
 
 ## tools/benchmark.py
 
@@ -1163,43 +1250,58 @@ Line numbers refer to formatted source, not this generated document.
 | 72 | `events` |
 | 73 | `samples` |
 | 74 | `messages` |
-| 75 | `recovery` |
-| 76 | `mode` |
-| 77 | `next_tick` |
-| 78 | `checkpoint_hex` |
-| 79 | `checkpoint_sha256` |
-| 82 | `scenarios` |
-| 93 | `choices` |
-| 94 | `defaults` |
-| 95 | `scenario` |
-| 96 | `capacity` |
-| 97 | `delay` |
-| 98 | `policy` |
-| 102 | `escape` |
-| 109 | `display` |
-| 115 | `bounded` |
-| 121 | `isReport` |
-| 123 | `row` |
-| 142 | `parsePreferences` |
-| 144 | `value` |
-| 146 | `row` |
-| 153 | `key` |
-| 161 | `replayMessages` |
-| 162 | `messages` |
-| 163 | `id` |
-| 164 | `status` |
-| 165 | `node` |
-| 166 | `attempts` |
-| 167 | `delivered_tick` |
-| 168 | `crc32c` |
-| 170 | `event` |
-| 172 | `message` |
-| 188 | `timelineSvg` |
-| 189 | `span` |
-| 190 | `x` |
-| 191 | `windows` |
-| 197 | `marks` |
-| 198 | `value` |
+| 75 | `waterfalls` |
+| 76 | `id` |
+| 77 | `release` |
+| 78 | `expires_at` |
+| 79 | `status` |
+| 80 | `observed_elapsed_ticks` |
+| 81 | `delivery_latency_ticks` |
+| 82 | `first_send_tick` |
+| 83 | `queue_ticks` |
+| 84 | `in_flight_ticks` |
+| 85 | `phase_ticks` |
+| 86 | `spans` |
+| 87 | `events` |
+| 88 | `bottlenecks` |
+| 89 | `censored` |
+| 91 | `recovery` |
+| 92 | `mode` |
+| 93 | `next_tick` |
+| 94 | `checkpoint_hex` |
+| 95 | `checkpoint_sha256` |
+| 98 | `scenarios` |
+| 109 | `choices` |
+| 110 | `defaults` |
+| 111 | `scenario` |
+| 112 | `capacity` |
+| 113 | `delay` |
+| 114 | `policy` |
+| 118 | `escape` |
+| 125 | `display` |
+| 131 | `bounded` |
+| 137 | `isReport` |
+| 139 | `row` |
+| 161 | `parsePreferences` |
+| 163 | `value` |
+| 165 | `row` |
+| 172 | `key` |
+| 180 | `replayMessages` |
+| 181 | `messages` |
+| 182 | `id` |
+| 183 | `status` |
+| 184 | `node` |
+| 185 | `attempts` |
+| 186 | `delivered_tick` |
+| 187 | `crc32c` |
+| 189 | `event` |
+| 191 | `message` |
+| 207 | `timelineSvg` |
+| 208 | `span` |
+| 209 | `x` |
+| 210 | `windows` |
+| 216 | `marks` |
+| 217 | `value` |
 
 ## web/env.d.ts
 
@@ -1276,20 +1378,31 @@ Line numbers refer to formatted source, not this generated document.
 | 118 | `tick-events` |
 | 118 | `tick-label` |
 | 118 | `timeline` |
-| 120 | `tick` |
-| 124 | `tick` |
-| 128 | `tick` |
-| 132 | `tick` |
-| 136 | `messageFilter` |
-| 144 | `replay` |
-| 146 | `r` |
-| 147 | `sample` |
-| 166 | `events` |
-| 169 | `messages` |
-| 175 | `ledger` |
-| 177 | `events` |
-| 187 | `remember` |
-| 195 | `load` |
+| 119 | `waterfall` |
+| 122 | `heading` |
+| 124 | `explanation` |
+| 129 | `entry` |
+| 130 | `details` |
+| 131 | `summary` |
+| 133 | `lifetime` |
+| 135 | `list` |
+| 136 | `span` |
+| 137 | `item` |
+| 141 | `causes` |
+| 150 | `tick` |
+| 154 | `tick` |
+| 158 | `tick` |
+| 162 | `tick` |
+| 166 | `messageFilter` |
+| 174 | `replay` |
+| 176 | `r` |
+| 177 | `sample` |
+| 196 | `events` |
+| 199 | `messages` |
+| 205 | `ledger` |
+| 207 | `events` |
+| 217 | `remember` |
+| 225 | `load` |
 
 ## web/style.css
 

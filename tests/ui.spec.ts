@@ -15,6 +15,31 @@ test("real native replay avoids future-state leakage", async ({ page }) => {
   await page.getByRole("button", { name: "Previous tick", exact: true }).click();
   await expect(page.locator("#tick-label")).toHaveText("30");
 });
+test("full-run waterfall explains actual latency separately from causal replay", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/");
+  await expect(page.locator("#evidence")).toBeVisible();
+  await expect(page.locator("#waterfalls details")).toHaveCount(3);
+  await expect(page.locator("#waterfalls")).toContainText(
+    "future outcomes relative to the replay cursor",
+  );
+  await expect(page.locator("#message-table")).toContainText("Not delivered yet");
+  await page.locator("#waterfalls summary").first().click();
+  await expect(page.locator("#waterfalls")).toContainText("in-flight-hop-0");
+  const report = await (await request.get("/api/run")).json();
+  for (const row of report.waterfalls)
+    expect(row.queue_ticks + row.in_flight_ticks).toBe(row.observed_elapsed_ticks);
+  await page.locator("#scenario").selectOption("corrupt-first");
+  await expect(page.locator("#status")).toContainText("Verified");
+  await page.locator("#waterfalls summary").first().click();
+  await expect(page.locator("#waterfalls details").first()).toContainText(
+    "integrity rejected events: 1",
+  );
+  await page.locator("#scenario").selectOption("empty-network");
+  await expect(page.locator("#waterfalls")).toContainText("No messages supplied.");
+});
 test("fault and restart evidence are observable", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("#evidence")).toBeVisible();

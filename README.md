@@ -2,6 +2,8 @@
 
 **Keep the message. Wait for the link.** An offline, reproducible store-and-forward networking workbench by [Jason Stys](https://github.com/JasonStys).
 
+The **complete-run message waterfall** now explains each message's queue waits, hop flight time, TTL boundary and actual congestion/integrity events. Queue plus flight time is checked against observed elapsed time. It distinguishes censored retained outcomes from delivery and keeps full-run explanations separate from causal tick replay. See [the waterfall guide](docs/MESSAGE_WATERFALL.md).
+
 Explore what happens when a synthetic probe cannot immediately reach a relay or ground sink: limited storage, intermittent contacts, propagation delay, expiry, corrupt copies, duplicate arrivals, competing priorities, and a worker restart with messages in flight. A dependency-free **Rust** worker produces the results; a separately implemented **Python** model checks every event, queue sample, and final message before evidence is displayed. **TypeScript, HTML, CSS, and SVG** provide an accessible interactive replay; **SQL** provides optional immutable local evidence storage.
 
 This is an educational three-node simulator, **not BPv7 interoperability, a radio stack, BPSec, spacecraft software, or a flight-qualified system**. All contacts and data are invented. No real equipment or network endpoints are contacted. See [model assumptions](docs/MODEL.md).

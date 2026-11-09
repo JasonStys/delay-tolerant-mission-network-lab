@@ -72,6 +72,22 @@ export interface Report {
   events: Event[];
   samples: Sample[];
   messages: Message[];
+  waterfalls: {
+    id: number;
+    release: number;
+    expires_at: number;
+    status: string;
+    observed_elapsed_ticks: number;
+    delivery_latency_ticks: number | null;
+    first_send_tick: number | null;
+    queue_ticks: number;
+    in_flight_ticks: number;
+    phase_ticks: Record<string, number>;
+    spans: { start: number; end: number; phase: string; node: number }[];
+    events: Event[];
+    bottlenecks: Record<string, number>;
+    censored: boolean;
+  }[];
   recovery: {
     mode: string;
     next_tick: number | null;
@@ -135,7 +151,10 @@ export function isReport(value: unknown): value is Report {
       (key) => !!row[key] && typeof row[key] === "object",
     ) &&
     Array.isArray(row.limitations) &&
-    row.limitations.every((v) => typeof v === "string")
+    row.limitations.every((v) => typeof v === "string") &&
+    Array.isArray(row.waterfalls) &&
+    row.waterfalls.length <= 32 &&
+    row.waterfalls.every((v) => !!v && typeof v === "object")
   );
 }
 /** Opt-in preference parsing rejects inherited scenarios, booleans/coercions and extra keys. */
