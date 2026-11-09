@@ -116,6 +116,36 @@ function render(): void {
     .join(
       "",
     )}</div><section class="panel"><div class="section-head"><div><p class="eyebrow">02 / CONTACT PLAN & REPLAY</p><h2>A link is an opportunity. Not a guarantee.</h2></div><span class="tag">SIMULATED TICKS</span></div><p>Each open hop can start one whole message per tick. Queue capacity counts retained payload bytes, including sender originals in flight. Final metrics above cover the entire experiment.</p><div class="replay-controls"><button id="previous" aria-label="Previous tick">←</button><label for="tick">Replay tick <output id="tick-label">0</output></label><input id="tick" type="range" min="0" max="${Math.max(0, bounded(r.input.horizon, 64) - 1)}" value="0" step="1"><button id="next" aria-label="Next tick">→</button><button id="last">Jump to end</button></div><div id="timeline" class="chart-region" role="region" tabindex="0" aria-label="Contact timeline; exact windows in contact table"></div><div id="network" class="network"></div><div id="tick-events" class="tick-events" aria-live="polite"></div><details><summary>Exact contact windows and phase order</summary><p>At each tick: expire retained messages → admit releases → process arrivals → start departures → record sample. A restart boundary is before that tick. Contacts are [start, end) for departures; arrivals may occur after a window closes.</p><table><thead><tr><th>Hop</th><th>Start included</th><th>End excluded</th></tr></thead><tbody>${r.input.contacts.map((c) => `<tr><td>${c.hop === 0 ? "Probe → Relay" : "Relay → Ground"}</td><td>${escape(c.start)}</td><td>${escape(c.end)}</td></tr>`).join("")}</tbody></table></details></section><section class="panel"><div class="section-head"><div><p class="eyebrow">03 / OWNERSHIP & OUTCOMES</p><h2>One logical owner. An explicit result.</h2></div></div><p>The message table reflects the selected tick. CRCs refer to the trusted original payload; this is accidental-corruption checking, not authentication. Sent messages remain retained until accepted.</p><div id="message-table"></div><div class="score-grid"><div><span>Transmission attempts</span><strong>${escape(r.totals.attempts)}</strong></div><div><span>Integrity rejections</span><strong>${escape(r.totals.integrity_rejected)}</strong></div><div><span>Receiver-full events</span><strong>${escape(r.totals.receiver_full)}</strong></div><div><span>Duplicate copies suppressed</span><strong>${escape(r.totals.duplicates)}</strong></div></div><p>Mean delivery latency / ticks: ${display(r.totals.mean_delivery_ticks, 3)}. This includes delivered messages only; it is not an overall-success statistic.</p></section><section class="panel"><div class="section-head"><div><p class="eyebrow">04 / RESTART EVIDENCE</p><h2>A fresh process. The same state.</h2></div><span class="tag">${escape(r.recovery.mode)}</span></div><p>${r.recovery.mode === "none" ? "No restart in this case. Select Restart with in-flight data to inspect a real two-worker checkpoint handoff." : `Checkpoint before tick ${escape(r.recovery.next_tick)}. The first Rust process exits; a fresh worker validates and restores the saved owner/flight state. Full results still match the independent reference.`}</p><p class="digest">CHECKPOINT SHA-256<br>${r.recovery.checkpoint_sha256 === null ? "Not applicable" : escape(r.recovery.checkpoint_sha256)}</p><p>For a committed disk handoff, use the CLI with <code>--checkpoint-store</code>. Browser runs do not write history or checkpoints to disk. This is boundary recovery, not a power-loss or distributed-transaction guarantee.</p></section><section class="panel"><div class="section-head"><div><p class="eyebrow">05 / CHRONOLOGICAL LEDGER</p><h2>No dropped context.</h2></div><label>Filter message<select id="message-filter"><option value="all">All messages</option>${r.input.messages.map((m) => `<option value="${escape(m.id)}">Message ${escape(m.id)}</option>`).join("")}</select></label></div><p>This full-run ledger is independent of replay position. Filtering changes display only, never final metrics or downloads.</p><div id="ledger"></div></section><section class="panel"><p class="eyebrow">06 / REPRODUCIBLE EVIDENCE</p><h2>Keep the assumptions with the trace.</h2><p>Source: ${escape(r.provenance.source)}. ${escape(r.provenance.reference)}.</p><div class="downloads">${["json", "csv", "html", "input"].map((format) => `<a href="/api/report?${query}&format=${format}" download>${format === "input" ? "Input JSON" : format.toUpperCase() + " report"} ↓</a>`).join("")}</div><p class="digest">REPORT SHA-256<br>${escape(r.id)}</p><details><summary>Model limits and provenance</summary><pre>${escape(JSON.stringify(r.provenance, null, 2))}</pre><ul>${r.limitations.map((text) => `<li>${escape(text)}</li>`).join("")}</ul></details></section>`;
+  const waterfall = document.createElement("section");
+  waterfall.className = "panel";
+  waterfall.id = "waterfalls";
+  const heading = document.createElement("h2");
+  heading.textContent = "Complete-run message waterfall";
+  const explanation = document.createElement("p");
+  explanation.textContent =
+    "This full-experiment trace includes future outcomes relative to the replay cursor. Spans show post-tick state on [start,end); queue + in-flight ticks account for observed latency before delivery/expiry or window end. TTL expiry precedes same-tick arrivals. Retained/unreleased outcomes are censored, not successful. Open-contact waiting means this message was not selected that tick; no-contact waiting refers only to the supplied synthetic schedule.";
+  waterfall.append(heading, explanation);
+  if (!r.waterfalls.length) waterfall.append("No messages supplied.");
+  for (const entry of r.waterfalls) {
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.textContent = `Message ${entry.id} · ${entry.status}${entry.censored ? " (censored)" : ""} · queue ${entry.queue_ticks} + in flight ${entry.in_flight_ticks} = ${entry.observed_elapsed_ticks} observed ticks`;
+    const lifetime = document.createElement("p");
+    lifetime.textContent = `Release ${entry.release}; expires at ${entry.expires_at}; first send ${entry.first_send_tick ?? "none"}; delivery latency ${entry.delivery_latency_ticks ?? "undefined"}.`;
+    const list = document.createElement("ol");
+    for (const span of entry.spans) {
+      const item = document.createElement("li");
+      item.textContent = `[${span.start}, ${span.end}) · ${span.phase} · owner node ${span.node}`;
+      list.append(item);
+    }
+    const causes = document.createElement("p");
+    causes.textContent = Object.entries(entry.bottlenecks)
+      .map(([name, count]) => `${name.replaceAll("_", " ")}: ${count}`)
+      .join("; ");
+    details.append(summary, lifetime, list, causes);
+    waterfall.append(details);
+  }
+  document.querySelector("#evidence")!.append(waterfall);
   document.querySelector("#tick")!.addEventListener("input", (event) => {
     tick = Number((event.target as HTMLInputElement).value);
     replay();
