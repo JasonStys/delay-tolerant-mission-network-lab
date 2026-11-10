@@ -23,11 +23,17 @@ Every tracked-intent file; dependencies/private outputs are excluded.
 - `docs/THIRD_PARTY.md` — # Third-party context and notices
 - `docs/USER_GUIDE.md` — # User guide
 - `docs/VALIDATION.md` — # Validation evidence
+- `docs/handbook.md` — # Delay Tolerant Mission Network Lab handbook
 - `docs/images/overview.jpg` — Binary screenshot asset from local application validation
 - `docs/images/workbench.jpg` — Binary screenshot asset from local application validation
 - `docs/reports/PORTABLE_RELEASE_20261109.md` — # Portable 1.1 release validation — 2026-11-09
 - `docs/reports/PRACTICAL_WORKFLOWS_20261109.md` — # Message waterfall validation — 2026-11-09
 - `docs/reports/benchmark.json` — Reviewed deterministic report identities and metrics for all bundled cases.
+- `docs/reports/documentation-refresh-2026-11-09.md` — # Documentation refresh — 2026-11-09
+- `docs/reports/project-guide.docx` — Reviewed Word project guide bound to the documented source revision.
+- `docs/reports/publications.json` — Exact Office publication byte identities, approved page/tab scopes and immutable source baselines.
+- `docs/reports/validation-evidence.xlsx` — Reviewed Excel workflow and test-source Tables with recalculated outcome formulas.
+- `docs/reports/validation-review.docx` — Reviewed Word validation evidence and explicit test/analysis limitations.
 - `dtnlab/__init__.py` — """Offline mission-network simulation by Jason Stys. Public definitions: docs/CODE_INDEX.md."""
 - `dtnlab/__main__.py` — """Local website launcher and reproducible export CLI by Jason Stys.
 - `dtnlab/engine.py` — """Synthetic cases, independent replay gate and deterministic evidence by Jason Stys.

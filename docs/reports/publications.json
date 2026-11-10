@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "project": "delay-tolerant-mission-network-lab",
+  "author": "Jason Stys",
+  "editionDate": "2026-11-09",
+  "sourceBaseline": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+  "sourceUrl": "https://github.com/JasonStys/delay-tolerant-mission-network-lab/tree/df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+  "functionalEvidenceBaseline": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+  "evidenceObservedAt": "2026-11-10T05:25:40.628667+00:00",
+  "workflowEvidence": [
+    {
+      "conclusion": "success",
+      "databaseId": 42752661003,
+      "event": "push",
+      "headSha": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+      "name": "CodeQL",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/delay-tolerant-mission-network-lab/actions/runs/42752661003"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 42752660975,
+      "event": "push",
+      "headSha": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+      "name": "Validation",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/delay-tolerant-mission-network-lab/actions/runs/42752660975"
+    }
+  ],
+  "summary": "Replay delayed message delivery, inspect queue and hop waterfalls, and export evidence through versioned 1.1 portable applications.",
+  "rationale": "Makes simulated recovery and latency investigation available without a developer setup, while checked extraction and release identity connect the download to reviewed source.",
+  "limitations": [
+    "Invented bounded topology and logical ticks; no real radios, BPv7/BPSec interoperability or exactly-once networking.",
+    "Waterfalls explain a complete simulated experiment; causal replay separately hides future outcomes. Neither diagnoses actual radio faults.",
+    "Unsigned portable files for documented desktop OS/CPU targets; no system installer, native mobile app, production host or operational assurance."
+  ],
+  "documents": [
+    {
+      "filename": "project-guide.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 75574,
+      "sha256": "549e724615e395421f8ef32cf14aa7582d81f53c0db52cced4566bfa7e70bef1",
+      "sourceBaseline": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 5,
+        "renderedPageSha256": {
+          "page-1.png": "7e3019650074473cbbf3fe3649b95319cc8d9f66d08a5b3f6ade012277892fde",
+          "page-2.png": "0f35e90318e72e40d20091ea66bbf37f8940c64ed5475ce424c3ed729e364940",
+          "page-3.png": "a2ec1b8b82fd81cdd7cc9c32353cb6e2261b42281da897d19c55636a3e05ee63",
+          "page-4.png": "da1c76d4abbdec2a7f1dac3299f4e1c2a431b73d7bee031619ac495f8f9d9020",
+          "page-5.png": "bacdba0b3dbd81a86434e0262a6ebe16f122687327d4fd578426781dc67f0c7a"
+        }
+      }
+    },
+    {
+      "filename": "validation-review.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 43747,
+      "sha256": "08acc6ff81578a1ed0c74550c0e90f00e5a00a563506d4330e2332ed821cfca2",
+      "sourceBaseline": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 4,
+        "renderedPageSha256": {
+          "page-1.png": "d2d2c5d71c935314263b9f2c6ab06bbadb96c83f3e27610735f928bef61fadad",
+          "page-2.png": "b152957bf0ce5cbb5205609e693ab79ac0636989239ee1b4f830c483c5749c27",
+          "page-3.png": "a29ba5afaf43f9e704a286a1a65a70744b9bc1bf4cf2b2f8322052ec99792758",
+          "page-4.png": "570dca2883de0b8cf609d1c55f94b622d35f3125fa72b91d9f6081a9204b43cf"
+        }
+      }
+    },
+    {
+      "filename": "validation-evidence.xlsx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "bytes": 7385,
+      "sha256": "ad0404f7926bc193373af618d0255822c786942fd50771cf17709550b906cd74",
+      "sourceBaseline": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+      "visualReview": {
+        "approved": true,
+        "tabsReviewed": ["Workflow evidence", "Test sources"],
+        "previewSha256": {
+          "workflow-evidence.png": "34dd1ab6e29d020d2d086dddd960e780c670c818e1d3d3454524fc460d54f2a3",
+          "test-sources.png": "0b1b37ba1f3f67ae8158d4dad11903c9fcdb04496b8e58b1d732281441dd10d5"
+        },
+        "tables": [
+          {
+            "name": "WorkflowEvidence",
+            "range": "A7:D9",
+            "autoFilter": true
+          },
+          {
+            "name": "TestSources",
+            "range": "A7:C17",
+            "autoFilter": true
+          }
+        ],
+        "formulaCount": 4,
+        "failureSensitivityReceiptPassed": true,
+        "formulaErrors": 0
+      }
+    }
+  ],
+  "scope": "Reviewed documentation editions of the cited source. Checksums identify bytes, not authorship. Historical measurements retain their own dates; integration CI must be checked separately."
+}
