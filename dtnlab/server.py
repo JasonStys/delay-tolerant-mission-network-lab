@@ -5,12 +5,17 @@ No upload, remote fetch, account, shell, or arbitrary file APIs. See docs/CODE_I
 """
 
 import json
+import os
+import re
+import secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlsplit
 
+from dtnlab import __version__
 from dtnlab.engine import CHOICES, Settings, build_run, catalog
+from dtnlab.package_info import package_info
 from dtnlab.reports import export_report
 
 CSP = (
@@ -38,6 +43,8 @@ class WorkbenchServer(ThreadingHTTPServer):
 
     daemon_threads = True
     assets: Path
+    instance_nonce: str
+    package: dict[str, Any] | None
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -98,7 +105,19 @@ class Handler(BaseHTTPRequestHandler):
         url = urlsplit(self.path)
         query = parse_qs(url.query, keep_blank_values=True, max_num_fields=8)
         if url.path == "/api/health" and not query:
-            self.reply(200, b'{"status":"ok","mode":"local-educational"}', "application/json")
+            self.reply(
+                200,
+                json.dumps(
+                    {
+                        "status": "ok",
+                        "mode": "local-educational",
+                        "version": __version__,
+                        "instance": self.server.instance_nonce,
+                        "package": self.server.package,
+                    }
+                ).encode(),
+                "application/json",
+            )
         elif url.path == "/api/catalog" and not query:
             self.reply(200, json.dumps(catalog()).encode(), "application/json")
         elif url.path in ("/api/run", "/api/report"):
@@ -155,6 +174,12 @@ class Handler(BaseHTTPRequestHandler):
 
 def make_server(assets: Path, port: int = 0) -> WorkbenchServer:
     """Create an ephemeral-port loopback service; no caller can select a public interface."""
+    nonce = os.environ.get("PORTABLE_SMOKE_NONCE", secrets.token_hex(16))
+    if re.fullmatch(r"[a-f0-9]{32}", nonce) is None:
+        raise ValueError("Invalid local instance marker")
+    metadata = package_info()
     server = WorkbenchServer(("127.0.0.1", port), Handler)
     server.assets = assets.resolve()
+    server.instance_nonce = nonce
+    server.package = metadata
     return server

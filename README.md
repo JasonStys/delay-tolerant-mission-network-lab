@@ -21,7 +21,7 @@ This is an educational three-node simulator, **not BPv7 interoperability, a radi
 
 ## Run the portable application
 
-Download a ZIP and its matching `.sha256` file from [Releases](https://github.com/JasonStys/delay-tolerant-mission-network-lab/releases/latest). Verify its digest, then extract **the entire ZIP** to a user-owned folder. Never run from inside the ZIP or separate the executable from `_internal`.
+Download the versioned Windows ZIP or Linux/macOS `.tar.gz` archive and its matching `.sha256` file from [Releases](https://github.com/JasonStys/delay-tolerant-mission-network-lab/releases/latest). Verify its digest, then extract **the entire archive** to a user-owned folder. Never run from inside an archive or separate the executable from `_internal`.
 
 - Windows x64: open `MissionNetworkLab.exe`.
 - Linux x64: `chmod +x MissionNetworkLab` if extraction did not retain executable permissions, then `./MissionNetworkLab`.
@@ -76,7 +76,7 @@ npm run test:e2e
 .venv/Scripts/python tools/package_app.py
 ```
 
-See [validation results and boundaries](docs/VALIDATION.md). GitHub Actions checks Linux/Windows/macOS, Python 3.12/3.14, three browser engines, dependency audits, CodeQL for Python/TypeScript, and real portable-app smoke tests. Workflows upload **no Actions artifacts or caches**. Release ZIPs are uploaded directly to a draft release only after the exact source commit's Validation and CodeQL workflows pass; final publication requires review.
+See [validation results and boundaries](docs/VALIDATION.md). GitHub Actions checks Linux/Windows/macOS, Python 3.12/3.14, three browser engines, dependency audits, CodeQL for Python/TypeScript, and real portable-app smoke tests. Workflows upload **no Actions artifacts or caches**. Release archives are uploaded directly to a draft release only after the exact source commit's Validation and CodeQL workflows pass; final publication requires review.
 
 ## Repository map
 
@@ -100,3 +100,20 @@ Each source file has a responsibility/creator header and definition contracts. [
 [Architecture](docs/ARCHITECTURE.md) · [Model](docs/MODEL.md) · [API](docs/API.md) · [User guide](docs/USER_GUIDE.md) · [Validation](docs/VALIDATION.md) · [Release/runbook](docs/RELEASE.md) · [Security](SECURITY.md) · [Third-party notices](docs/THIRD_PARTY.md)
 
 Created by **Jason Stys**. [Portfolio/contact profile](https://github.com/JasonStys) · [Project help/issues](https://github.com/JasonStys/delay-tolerant-mission-network-lab/issues). MIT source license. No agency, employer, standards-body, or mission affiliation or endorsement.
+
+## Portable release identity
+
+The 1.1 release contract keeps the software version consistent across Python, npm, the
+running service and the UI. Versioned archives include `RELEASE.json` with source commit,
+platform and clean/dirty build status. Packaging tests the **freshly extracted** application,
+including its new practical workflow, from an unrelated temporary working directory.
+Windows uses ZIP; Linux/macOS use `.tar.gz` to preserve required native links and permissions.
+Published 1.0 assets remain unchanged. Check the selected release's source and version rather
+than assuming an older download contains current source improvements. See the
+[portable operation and release guide](docs/RELEASE.md).
+
+Observed local packaging checks and boundaries: [portable 1.1 validation](docs/reports/PORTABLE_RELEASE_20261109.md).
+
+Draft discovery uses a bounded complete authenticated release listing and numeric-ID
+verification; a published-only tag lookup cannot prove that an untagged draft is absent.
+The release guide documents fail-closed ambiguity/history limits and the no-overwrite policy.
