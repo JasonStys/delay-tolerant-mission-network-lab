@@ -1,7 +1,7 @@
 # Jason Stys: stdlib runtime, bounded synthetic models and strict verification policy.
 [project]
 name = "delay-tolerant-mission-network-lab"
-version = "1.0.0"
+version = "1.1.0"
 description = "Bounded store-and-forward simulation, independent verification and fresh-process recovery by Jason Stys"
 requires-python = ">=3.12,<3.15"
 dependencies = []
@@ -24,3 +24,9 @@ show_missing = true
 strict = true
 python_version = "3.12"
 files = ["dtnlab"]
+
+[tool.portable]
+package = "dtnlab"
+executable = "MissionNetworkLab"
+title = "Delay Tolerant Mission Network Lab"
+workflows = ["validate.yml", "codeql.yml"]

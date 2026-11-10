@@ -1,38 +1,18 @@
-"""Upload only a freshly smoke-tested native bundle to its draft by Jason Stys.
+"""Upload one inspected source/version archive pair by Jason Stys.
 
-Function: main. Variables: version/repository/metadata/assets. Index: docs/CODE_INDEX.md.
-The workflow never publishes or replaces a public release asset.
+Function: main; shared authorization contract: release_contract.py. Index: docs/CODE_INDEX.md.
+No public release or existing asset is replaced; SHA-256 and archive metadata are rechecked.
 """
 
-import json
-import os
-import re
-import subprocess
-from pathlib import Path
+if __package__:
+    from .release_contract import upload
+else:
+    from release_contract import upload
 
 
 def main() -> None:
-    """Refuse malformed versions, public releases and missing bundles before transmission."""
-    version, repository = os.environ["VERSION"], os.environ["GITHUB_REPOSITORY"]
-    if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version):
-        raise SystemExit("Invalid version")
-    result = subprocess.run(
-        ["gh", "release", "view", f"v{version}", "--repo", repository, "--json", "isDraft"],
-        check=True,
-        capture_output=True,
-        text=True,
-        timeout=30,
-    )
-    if not json.loads(result.stdout)["isDraft"]:
-        raise SystemExit("Upload target is not a draft")
-    assets = sorted(Path("dist").glob("delay-tolerant-mission-network-lab-*.*"))
-    if len(assets) != 2 or {p.suffix for p in assets} != {".zip", ".sha256"}:
-        raise SystemExit("Expected exactly one verified ZIP/checksum pair")
-    subprocess.run(
-        ["gh", "release", "upload", f"v{version}", "--repo", repository, *map(str, assets)],
-        check=True,
-        timeout=120,
-    )
+    """Require unchanged draft target and exact source/platform/version bytes before upload."""
+    upload()
 
 
 if __name__ == "__main__":

@@ -30,8 +30,18 @@ SKIP = {
     "test-results",
     "playwright-report",
 }
-SOURCE_SUFFIXES = {".py", ".ts", ".css", ".html", ".sql", ".rs"}
+SOURCE_SUFFIXES = {".py", ".ts", ".mjs", ".css", ".html", ".sql", ".rs"}
 FILE_PURPOSES = {
+    "tools/release_contract.py": "Version/source coherence, exact-main prerequisites and immutable draft upload guards.",
+    "tools/portable_archive.py": "Bounded Windows ZIP/POSIX tar creation, metadata inspection and fresh safe extraction.",
+    "tools/native_browser.mjs": "Owned Chromium context, local resource boundary, version and real-error acceptance.",
+    "tools/native_feature_smoke.mjs": "Actual extracted-application new-feature UI/API/download acceptance with independent arithmetic.",
+    "tools/legacy_smoke.py": "Preserved native domain CLI, resource, license, persistence and HTTP acceptance under active guards.",
+    "dtnlab/package_info.py": "Bounded frozen release identity; source mode never borrows a packaged-source claim.",
+    "tests/test_release_contract.py": "Independent negative source/version/prerequisite/draft/hash/upload authorization cases.",
+    "tests/test_portable_archive.py": "Actual archive bytes, traversal/link/type/budget/permission and extraction regression cases.",
+    "tests/test_package_info.py": "Frozen metadata corruption, explicit source mode and pre-bind owned-instance marker regressions.",
+    "web/release-version.ts": "Canonical bundled application version rendered from package.json without remote lookup.",
     "examples/restart.json": "Editable strict invented message/contact case with a fresh-worker restart boundary.",
     "docs/reports/benchmark.json": "Reviewed deterministic report identities and metrics for all bundled cases.",
     "Cargo.toml": "Dependency-free safe Rust library/worker targets, compiler/lint/release contract.",

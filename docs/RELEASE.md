@@ -1,31 +1,74 @@
-# Release and maintenance runbook
+# Portable application and release runbook
 
-Author: Jason Stys. Release assets are unsigned offline lab applications, not public-hosted services.
+Maintained by Jason Stys. Delay Tolerant Mission Network Lab is an unsigned educational desktop application,
+not a production hosted service, signed installer or real-equipment controller.
 
-## Before pushing or running Actions
+## Download, extract and launch
 
-Check account Actions billing and available artifact inventory **read-only**. Live artifact bytes are not the same measurement as accrued billing usage; caches are separate. Report the available billing meter and uncertainty to the owner. Do not delete any runs, artifacts or caches without fresh explicit approval and verified archive policy. This repository uses no Actions artifact uploads or dependency caches; direct draft-release assets are a separate mechanism. Do not execute historical archived Actions evidence.
+Use the official [repository releases](https://github.com/JasonStys/delay-tolerant-mission-network-lab/releases).
+Version 1.1 uses a versioned **Windows ZIP** or **Linux/macOS tar.gz**, plus an adjacent
+SHA-256 file. Older published assets remain immutable and may predate current features.
 
-## Source gate
+1. Select the correct CPU/OS build and compare its SHA-256 with the sidecar. On Windows,
+   `Get-FileHash -Algorithm SHA256` computes the digest; on Linux/macOS use `sha256sum`
+   or `shasum -a 256`. A checksum identifies bytes, not publisher authenticity or safety.
+2. Extract into a new user-owned folder. Windows users extract the whole ZIP. On Linux/macOS,
+   use a tar-aware extractor such as `tar -xzf <archive.tar.gz>`; tar preserves PyInstaller's
+   relative internal links and executable permissions. Do not flatten the archive, run from
+   inside it or separate the executable from `_internal` and its license notices.
+3. Inspect `MissionNetworkLab/RELEASE.json`. Its name, version, source commit, platform,
+   CPU and clean/dirty status must agree with the chosen release. Published builds require
+   `source_dirty: false`; a local dirty development build is not exact-source release proof.
+4. Open `MissionNetworkLab.exe` on Windows, or `./MissionNetworkLab` on Linux/macOS.
+   The launcher opens your normal browser on a private ephemeral `127.0.0.1` port. Keep its
+   console open; Ctrl+C stops that process. No compiler, Python/Node setup, Docker, account,
+   administrator elevation or public host is required for the portable application.
 
-1. Format Python/Rust/web/docs, run lint/strict type checks and regenerate `tools/verify_repo.py --write` indexes. A normal verification run must then pass without writing.
-2. Run the native tests, Python branch-inclusive coverage, all browser unit/e2e checks, dependency audits and deterministic benchmark contracts. Investigate drift before deliberately changing a reviewed contract.
-3. Build the actual portable application and execute its smoke test. Review source diff, ignored private files and model limitations; never suppress a real test failure to get a green badge.
-4. Push reviewed source. Require all eight Validation jobs and both CodeQL language jobs to succeed at the **exact commit**. Inspect open CodeQL alerts separately: a green analysis job does not itself prove zero findings.
+The targets are desktop Windows x64, Linux x64 and macOS arm64 under their tested runner
+conditions, not every OS version or a native mobile installation. Builds are unsigned and
+unnotarized. Respect OS/organization policy; never disable security controls to run them.
+Keep user-created histories and exports separate from installation folders. Local report
+histories are not encrypted account stores. Preserve original model/data/provenance limits.
 
-## Portable release gate
+## Source and package acceptance
 
-Manually dispatch **Portable release** with a new `digits.digits.digits` version on main. Preparation requires the latest exact-SHA Validation and CodeQL runs to be successful. It creates a draft, never publishes automatically. Three OS runners build the website and pinned Rust worker, freeze the app, actually run its CLI + SQLite restart + HTTP smoke, and upload a ZIP/checksum pair directly to the draft. Uploads do not overwrite existing assets.
+Before pushing or invoking Actions, inspect storage/billing read-only and report available
+usage with its uncertainty. Artifact bytes, accrued billing usage and caches are different
+measurements. Do not delete runs, artifacts or caches without fresh explicit authorization.
+These workflows do not upload Actions artifacts or dependency caches.
 
-Before publishing:
+Run formatting, strict types, source inventories, independent model/native tests, Python
+branch-inclusive coverage, browser unit/journey tests and dependency audits. Do not refresh
+reference results merely to hide a failure. Preserve numerical/model contracts and user data.
 
-- Confirm all three platform jobs passed and draft target/tag/main refer to the reviewed source.
-- Download all three **newly generated owned-source** ZIP/checksum pairs to a new folder; compare ZIP SHA-256 with its manifest and GitHub asset digest where available.
-- Extract and execute the downloaded native bundle on the available local platform; verify a custom input, persisted fresh-worker handoff and SQL history against the reviewed source output. Do not claim local execution on unavailable OSes; their runner smoke tests are separate evidence.
-- Review release notes with source SHA, actual workflow links/results, measured test counts and scope limits. Publish the verified draft only after this review.
+The portable build freezes reviewed production UI/resources, writes source/version metadata,
+creates the native archive and checksum, then inspects and extracts it into a fresh temporary
+folder. Its actual extracted executable must complete CLI/resource checks, owned health/version
+proof, real built JavaScript/CSS delivery and the new-feature Chromium/API/export journey.
+No source-server substitution, mocked successful HTTP response or unrelated existing service
+can establish native acceptance. All owned test processes and browser contexts must close.
+A package launch is not clean-machine installer certification, signing or notarization.
 
-## Teardown / rollback
+## Draft-only publication
 
-Stop only preview/test processes launched for this task and verify their ports are closed. Preserve the final release URL; do not leave an unintended local service running. Retain local evidence and do not clean unrelated app processes or change OS protections.
+Dispatch **Portable release** on main with version `1.1.0` only after that exact clean source
+passes every configured Validation/CodeQL lane. Python, npm and runtime versions must agree.
+The conservative gate rejects missing, active, failed, foreign or ambiguous exact-source runs,
+and confirms current main before creating a **new draft**. Existing tags/releases are rejected;
+never retarget or reuse published assets.
 
-If a released bug/security issue appears, warn users, remove Latest status as appropriate and fix forward under a new version. Do not silently replace published archives or rewrite existing hashes. No database migration or cloud deployment occurs here. Users can retain an older whole-directory bundle and its separate evidence files; never overwrite their histories/exports during recovery.
+All three OS jobs build and test extracted native bundles. Upload requires the same draft
+source/version, complete embedded metadata, exact archive digest and no existing same-name
+asset. Release assets go directly to the draft, not Actions storage. No step publishes it.
+
+Before publication, verify all three native jobs and exact source checks, every archive's
+sidecar and GitHub asset digest, expected platform set and release notes. Download and test
+only newly built/reviewed assets, never historical archived Actions evidence. Record local
+execution separately from unavailable OSes' hosted evidence. Successful CodeQL execution
+does not by itself establish zero open security findings.
+
+## Teardown and recovery
+
+Stop only the test/preview processes you created. Do not kill unknown services, overwrite
+histories or modify OS security. Keep old whole-directory bundles for rollback. Fix published
+bugs under a fresh version; do not silently replace archives, hashes or old release tags.

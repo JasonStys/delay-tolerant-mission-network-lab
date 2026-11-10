@@ -67,7 +67,7 @@ jobs:
   portable:
     name: Portable app / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
@@ -82,6 +82,9 @@ jobs:
       - run: python -m pip install --require-hashes -r requirements-dev.lock
       - run: npm ci
       - run: npm run build
+      - name: Install locked Chromium for extracted native feature acceptance
+        timeout-minutes: 15
+        run: npx --no-install playwright install --with-deps chromium
       - run: rustup toolchain install 1.98.1 --profile minimal --component clippy,rustfmt,rust-docs
       - run: cargo build --release --locked
       - run: python tools/package_app.py
