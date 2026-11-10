@@ -117,3 +117,9 @@ Observed local packaging checks and boundaries: [portable 1.1 validation](docs/r
 Draft discovery uses a bounded complete authenticated release listing and numeric-ID
 verification; a published-only tag lookup cannot prove that an untagged draft is absent.
 The release guide documents fail-closed ambiguity/history limits and the no-overwrite policy.
+
+## Documentation editions
+
+Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx) · [validation-review.docx](docs/reports/validation-review.docx) · [validation-evidence.xlsx](docs/reports/validation-evidence.xlsx).
+
+[Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
