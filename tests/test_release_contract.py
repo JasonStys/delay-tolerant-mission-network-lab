@@ -7,6 +7,7 @@ All remote calls are substituted; archive bytes are real. Exact lines: docs/CODE
 import copy
 import hashlib
 import json
+import shutil
 import subprocess
 import zipfile
 
@@ -40,6 +41,26 @@ def run_record(workflow):
         "path": ".github/workflows/" + workflow,
         "repository": {"full_name": REPOSITORY},
     }
+
+
+def draft_record(**changes):
+    """Independently authored authenticated draft list/detail shape, including untagged HTML URL."""
+    identifier = 439911956
+    base = f"repos/{REPOSITORY}/releases/{identifier}"
+    value = {
+        "id": identifier,
+        "tag_name": "v1.1.0",
+        "draft": True,
+        "prerelease": False,
+        "target_commitish": SOURCE,
+        "url": "https://api.github.com/" + base,
+        "assets_url": "https://api.github.com/" + base + "/assets",
+        "upload_url": "https://uploads.github.com/" + base + "/assets{?name,label}",
+        "html_url": "https://github.com/" + REPOSITORY + "/releases/tag/untagged-fixture",
+        "assets": [],
+    }
+    value.update(changes)
+    return value
 
 
 @pytest.fixture
@@ -227,7 +248,8 @@ def test_prepare_never_retargets_or_reuses_an_existing_version(context, monkeypa
         """Explicit occupied tag or release responses; no process may mutate them."""
         if "/git/ref/tags/" in endpoint:
             return {"object": {"sha": SOURCE}} if existing == "tag" else None
-        return {"draft": existing == "old-draft", "target_commitish": "b" * 40}
+        info = draft_record(draft=existing == "old-draft", target_commitish="b" * 40)
+        return [info] if "/releases?" in endpoint else info
 
     monkeypatch.setattr(release, "gh_json", response)
 
@@ -243,7 +265,9 @@ def test_prepare_never_retargets_or_reuses_an_existing_version(context, monkeypa
 def test_prepare_creates_only_exact_version_source_draft(context, monkeypatch):
     """Literal arguments bind the new draft to reviewed SHA without publishing flags."""
     monkeypatch.setattr(release, "require_checks", lambda *args: None)
-    monkeypatch.setattr(release, "gh_json", lambda *args, **kwargs: None)
+    monkeypatch.setattr(
+        release, "gh_json", lambda endpoint, **kwargs: [] if "/releases?" in endpoint else None
+    )
     calls = []
     monkeypatch.setattr(subprocess, "run", lambda argv, **kwargs: calls.append(argv))
     release.prepare()
@@ -267,7 +291,7 @@ def test_prepare_requires_prerequisites_before_creating(context, monkeypatch, co
             run = run_record(workflow)
             run["conclusion"] = conclusion
             return {"total_count": 1, "workflow_runs": [run]}
-        return None
+        return [] if "/releases?" in endpoint else None
 
     monkeypatch.setattr(release, "gh_json", response)
     monkeypatch.setattr(subprocess, "run", lambda argv, **kwargs: writes.append(argv))
@@ -299,9 +323,13 @@ def upload_fixture(context, tmp_path, monkeypatch):
     archives.create_archive(bundle, archive)
     digest = hashlib.sha256(archive.read_bytes()).hexdigest()
     checksum.write_text(f"{digest}  {archive.name}\n", encoding="utf-8")
-    info = {"draft": True, "tag_name": "v1.1.0", "target_commitish": SOURCE, "assets": []}
+    info = draft_record()
     monkeypatch.setattr(
-        release, "gh_json", lambda endpoint, **kwargs: None if "/git/ref/" in endpoint else info
+        release,
+        "gh_json",
+        lambda endpoint, **kwargs: (
+            None if "/git/ref/" in endpoint else [info] if "/releases?" in endpoint else info
+        ),
     )
     calls = []
     monkeypatch.setattr(subprocess, "run", lambda argv, **kwargs: calls.append(argv))
@@ -358,3 +386,30 @@ def test_upload_uses_only_expected_pair_without_clobber(upload_fixture):
     release.upload()
     assert len(calls) == 1 and calls[0][-2:] == [str(archive), str(checksum)]
     assert "--clobber" not in calls[0]
+
+
+@pytest.mark.parametrize(
+    "filename,before,after",
+    [
+        ("Cargo.toml", 'name = "delay-tolerant-mission-network-lab"', 'name = "other-product"'),
+        ("Cargo.toml", 'version = "1.1.0"', 'version = "1.0.0"'),
+        ("Cargo.lock", 'name = "delay-tolerant-mission-network-lab"', 'name = "other-product"'),
+        ("Cargo.lock", 'version = "1.1.0"', 'version = "1.0.0"'),
+    ],
+)
+def test_native_product_metadata_rejected_before_release(
+    tmp_path, monkeypatch, filename, before, after
+):
+    """The same named native product/lock must agree; independent component/schema versions stay separate."""
+    original = release.ROOT
+    for source in ["pyproject.toml", "package.json", "Cargo.toml", "Cargo.lock"]:
+        shutil.copyfile(original / source, tmp_path / source)
+    (tmp_path / "dtnlab").mkdir()
+    shutil.copyfile(original / "dtnlab/__init__.py", tmp_path / "dtnlab/__init__.py")
+    target = tmp_path / filename
+    text = target.read_text()
+    assert before in text
+    target.write_text(text.replace(before, after, 1))
+    monkeypatch.setattr(release, "ROOT", tmp_path)
+    with pytest.raises(ValueError, match="product"):
+        release.configuration()

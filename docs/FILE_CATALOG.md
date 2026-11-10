@@ -56,6 +56,7 @@ Every tracked-intent file; dependencies/private outputs are excluded.
 - `rust-toolchain.toml` — Pinned Rust toolchain and documentation component for runtime notices.
 - `rust/lib.rs` — //! Bounded deterministic store-and-forward engine by Jason Stys.
 - `rust/main.rs` — //! Bounded stdin-only native worker by Jason Stys; main/input/output variables: docs/CODE_INDEX.md.
+- `tests/test_draft_lookup.py` — Independent draft/public/pagination/identity and transport-failure lookup cases.
 - `tests/test_engine.py` — """Native/reference, conservation and restart verification by Jason Stys.
 - `tests/test_io.py` — """CLI, report, SQLite and actual loopback HTTP integration tests by Jason Stys.
 - `tests/test_model.py` — """Strict JSON/tick/range envelope and native bridge failure tests by Jason Stys.
@@ -65,6 +66,7 @@ Every tracked-intent file; dependencies/private outputs are excluded.
 - `tests/test_waterfall.py` — """Hand-calculated message latency and conservative bottleneck contracts by Jason Stys.
 - `tests/ui.spec.ts` — /** Actual three-engine native/service/UI acceptance by Jason Stys. Tests: docs/CODE_INDEX.md.
 - `tools/benchmark.py` — """Deterministic native/reference contracts and descriptive timing by Jason Stys.
+- `tools/draft_lookup.py` — Complete bounded authenticated release listing, unique tag and immutable-ID draft validation.
 - `tools/legacy_smoke.py` — Preserved native domain CLI, resource, license, persistence and HTTP acceptance under active guards.
 - `tools/native_browser.mjs` — Owned Chromium context, local resource boundary, version and real-error acceptance.
 - `tools/native_feature_smoke.mjs` — Actual extracted-application new-feature UI/API/download acceptance with independent arithmetic.

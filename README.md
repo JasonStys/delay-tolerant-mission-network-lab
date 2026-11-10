@@ -112,4 +112,8 @@ Published 1.0 assets remain unchanged. Check the selected release's source and v
 than assuming an older download contains current source improvements. See the
 [portable operation and release guide](docs/RELEASE.md).
 
-Observed local packaging checks and boundaries: [portable1.1 validation](docs/reports/PORTABLE_RELEASE_20261109.md).
+Observed local packaging checks and boundaries: [portable 1.1 validation](docs/reports/PORTABLE_RELEASE_20261109.md).
+
+Draft discovery uses a bounded complete authenticated release listing and numeric-ID
+verification; a published-only tag lookup cannot prove that an untagged draft is absent.
+The release guide documents fail-closed ambiguity/history limits and the no-overwrite policy.

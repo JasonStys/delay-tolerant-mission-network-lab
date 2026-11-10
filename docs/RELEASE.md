@@ -72,3 +72,13 @@ does not by itself establish zero open security findings.
 Stop only the test/preview processes you created. Do not kill unknown services, overwrite
 histories or modify OS security. Keep old whole-directory bundles for rollback. Fix published
 bugs under a fresh version; do not silently replace archives, hashes or old release tags.
+
+## Authenticated draft lookup
+
+GitHub's release-by-tag REST endpoint is for published releases, so a draft's tag returning
+404 does not establish absence. `tools/draft_lookup.py` completely lists visible releases
+within a three-page/100-per-page cap, rejects ambiguity, then rereads a unique numeric ID.
+Incomplete histories, API failures and changed identity fail closed. Preparation rejects any
+existing version; upload requires the exact-source unpublished draft plus the original
+archive, digest and no-overwrite checks. See the portable release report for the observed
+API failure, correction and independent regression cases.

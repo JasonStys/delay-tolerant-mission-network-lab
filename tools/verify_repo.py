@@ -32,6 +32,8 @@ SKIP = {
 }
 SOURCE_SUFFIXES = {".py", ".ts", ".mjs", ".css", ".html", ".sql", ".rs"}
 FILE_PURPOSES = {
+    "tools/draft_lookup.py": "Complete bounded authenticated release listing, unique tag and immutable-ID draft validation.",
+    "tests/test_draft_lookup.py": "Independent draft/public/pagination/identity and transport-failure lookup cases.",
     "tools/release_contract.py": "Version/source coherence, exact-main prerequisites and immutable draft upload guards.",
     "tools/portable_archive.py": "Bounded Windows ZIP/POSIX tar creation, metadata inspection and fresh safe extraction.",
     "tools/native_browser.mjs": "Owned Chromium context, local resource boundary, version and real-error acceptance.",

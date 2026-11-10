@@ -16,6 +16,11 @@ import tomllib
 from pathlib import Path
 from typing import Any
 
+if __package__:
+    from .draft_lookup import find_release, require_draft
+else:
+    from draft_lookup import find_release, require_draft
+
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = re.compile(r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)")
 SHA = re.compile(r"[a-f0-9]{40}")
@@ -62,6 +67,13 @@ def configuration() -> dict[str, Any]:
         ),
         "Invalid workflow filename",
     )
+    native = tomllib.loads((ROOT / "Cargo.toml").read_text(encoding="utf-8"))["package"]
+    require(
+        native["name"] == name and native["version"] == version, "Rust product identity mismatch"
+    )
+    native_lock = tomllib.loads((ROOT / "Cargo.lock").read_text(encoding="utf-8"))["package"]
+    selected = [entry for entry in native_lock if entry["name"] == name]
+    require(len(selected) == 1 and selected[0]["version"] == version, "Rust product lock mismatch")
     return {"name": name, "version": version, **portable}
 
 
@@ -169,7 +181,7 @@ def prepare() -> None:
         "Version tag already exists",
     )
     require(
-        gh_json(f"repos/{repository}/releases/tags/{tag}", missing=True) is None,
+        find_release(gh_json, repository, tag, missing=True) is None,
         "Release version already exists",
     )
     subprocess.run(
@@ -212,13 +224,7 @@ def upload() -> None:
         from portable_archive import archive_metadata
     metadata, repository = release_context()
     tag = f"v{metadata['version']}"
-    release = gh_json(f"repos/{repository}/releases/tags/{tag}")
-    require(
-        release["draft"] is True
-        and release["tag_name"] == tag
-        and release["target_commitish"] == metadata["source_commit"],
-        "Draft target/source mismatch",
-    )
+    release = require_draft(gh_json, repository, metadata["version"], metadata["source_commit"])
     require(
         gh_json(f"repos/{repository}/git/ref/tags/{tag}", missing=True) is None,
         "Version tag already exists",
