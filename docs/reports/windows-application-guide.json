@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "repository": "delay-tolerant-mission-network-lab",
+  "runtimeVersion": "1.1.0",
+  "runtimeSource": "df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac",
+  "createdAt": "2026-11-10T23:50:46.993Z",
+  "author": "Jason Stys",
+  "document": "windows-application-guide.docx",
+  "sha256": "41e8fbc940ad2939b97b5edbfa9012700173ced3a97acca1e833dd1cd4e0d677",
+  "screenshots": [
+    {
+      "file": "01-delivery-waterfall.png",
+      "sha256": "1eb6dbfe728f95aad2904c4b102cbb307c30cac8e9c63f55707ad4c017bc69d7",
+      "width": 1172,
+      "height": 579,
+      "caption": "Actual installed application showing nominal queue/hop delivery. Captured during the accepted native user journey with prepared synthetic inputs."
+    },
+    {
+      "file": "02-corrupt-first.png",
+      "sha256": "4961981693844f6d39c8aa8d5cffd21fef5313adeb592acdf51ed8a96655e73a",
+      "width": 1172,
+      "height": 579,
+      "caption": "Actual installed application showing corrupt-first integrity rejection. Captured during the accepted native user journey with prepared synthetic inputs."
+    }
+  ],
+  "snippets": [
+    {
+      "file": "dtnlab/waterfall.py",
+      "first": 51,
+      "last": 76,
+      "sha256": "f9bc6cfbf2d7732dfffdbb55f1adca58c46c4d68747ae801bb3cf5ef1582e34f",
+      "url": "https://github.com/JasonStys/delay-tolerant-mission-network-lab/blob/df32f632dc89a329cfdd4eaf9c9f7b7248f8f5ac/dtnlab/waterfall.py#L51"
+    }
+  ],
+  "observedTests": [
+    {
+      "name": "Published package",
+      "observed": "Exact public release, provider/sidecar hashes and installed resources verified; installed bytes unchanged.",
+      "result": "Passed"
+    },
+    {
+      "name": "Actual native core",
+      "observed": "The existing packaged CLI/API and native feature acceptance helper passed on the installed executable.",
+      "result": "Passed"
+    },
+    {
+      "name": "Scenario evidence",
+      "observed": "Three nominal messages delivered; queued plus in-flight ticks equaled elapsed latency. Corruption and an empty network remained explicit causal cases.",
+      "result": "Passed"
+    },
+    {
+      "name": "UI and cleanup",
+      "observed": "Actual compiled-application browser journey passed. Both images were individually inspected; cleanup left no owned child process.",
+      "result": "Passed"
+    }
+  ],
+  "visualReview": {
+    "approved": true,
+    "pageCount": 4,
+    "reviewedAt": "2026-11-11T01:38:51.276449+00:00",
+    "reviewers": [
+      "audit_apps"
+    ],
+    "method": "Every page individually viewed at original resolution; unchanged previously reviewed pages retained only after exact SHA-256 match.",
+    "pageSHA256": {
+      "1": "efcb3d3dd3cade4d2c69167ba6d2d538297f4b3aba06585f71ded7ee0544f4b5",
+      "2": "ff03b03ce0b8b3464a45b563d7b26a9df4c50b0917aaf95ed160d53dc3f7b1df",
+      "3": "1a863f4f649ef47c85069602b4101279d2407d49b757332f0e8b614988b2402b",
+      "4": "b5d935584e6e434af04ac30ef9055c012e6c381a7e23c8c7d348cdd876061dce"
+    },
+    "ooxmlSchema": "passed",
+    "issues": []
+  }
+}
