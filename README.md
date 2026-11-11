@@ -123,3 +123,12 @@ The release guide documents fail-closed ambiguity/history limits and the no-over
 Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx) · [validation-review.docx](docs/reports/validation-review.docx) · [validation-evidence.xlsx](docs/reports/validation-evidence.xlsx).
 
 [Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
+
+## Illustrated Windows application guide
+
+The [four-page Windows application guide](docs/reports/windows-application-guide.docx)
+contains actual installed-application screenshots, a worked project scenario,
+important source excerpts with exact line references, observed results and
+operating limits. Read its [byte identities and review](docs/reports/windows-application-guide.json)
+and the [dated installation validation](docs/reports/installed-windows-2026-11-10.md).
+Prepared scenarios run inside the full application; there is no separate demo app.
